@@ -73,4 +73,3 @@ export class FiltersComponent implements OnInit, OnDestroy {
     }
   }
 }
-

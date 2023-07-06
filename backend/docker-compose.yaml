@@ -3,7 +3,7 @@ services:
   database:
     image: postgres:latest
     restart: always
-    container_name: webshop
+    container_name: webshop_backend
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_HOST_AUTH_METHOD: 'trust'

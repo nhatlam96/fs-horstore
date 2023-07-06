@@ -18,13 +18,13 @@ The default port is 4200.
 ## cd Frontend/
 
 2)  Build the Docker Image
-## sudo docker build -t frontend .
+## sudo docker build -t webshop_frontend .
 
 3) Run the Docker Container
-## sudo docker run -p 8081:80 frontend
+## sudo docker run -p 4300:80 webshop_frontend
 
 4) Access Your Angular App
-## http://localhost:8081
+## http://localhost:4300
 Please always start with the /index.html or / route because of docker we need to come first here.
 
 

@@ -5,7 +5,8 @@ Make sure the following commands are installed on your system:
 - docker https://docs.docker.com/get-docker/
   - docker compose https://docs.docker.com/compose/install/
 - node https://nodejs.org/en/download
-- jest (install it with `npm install -g jest`, try with `sudo` on unix)
+- jest (install via `sudo npm install -g jest`)
+- ng (install via `sudo npm install -g @angular/cli`)
 
 ## Running the Commands
 1. open Docker Desktop or have Docker Daemon running
@@ -21,7 +22,9 @@ Make sure the following commands are installed on your system:
    4. `node app/build/webapp.js`
 4. open new terminal
    1. `cd frontend`
-   2. `ng serve`
+   2. `sudo docker build -t webshop_frontend .`
+   3. `sudo docker run -p 4200:80 webshop_frontend`
+5. open browser http://localhost:4200/
 
 ### Startscripts
 Alternatively, you can use the provided scripts in `backend` directory 
