@@ -2,8 +2,8 @@
 
 ## Requirements
 Make sure the following commands are installed on your system:
-- do00cker https://docs.docker.com/get-docker/
-  - do0cker compose https://docs.docker.com/compose/install/
+- docker https://docs.docker.com/get-docker/
+  - docker compose https://docs.docker.com/compose/install/
 - node https://nodejs.org/en/download
 - jest (install it with `npm install -g jest`, try with `sudo` on unix)
 
