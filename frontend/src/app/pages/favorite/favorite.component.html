@@ -1,0 +1,44 @@
+<div *ngIf="favorite.items.length" class="card home_style">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of dataSource">
+        <td>
+          <img [src]="element.product" alt="product" class="product_img" />
+        </td>
+        <td>
+          <span class="truncate">{{ element.name }}</span>
+        </td>
+        <td>{{ element.price | currency }}</td>
+        <td>
+          <button class="clear_all btn btn-primary" (click)="onRemoveFromFavorite(element)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <button class="btn btn-primary clear_all" (click)="onClearFavorite()">Clear All</button>
+          <button class="btn btn-primary btn_checkout" (click)="onCheckout()">Proceed To Checkout</button>
+          <button class="btn btn-primary btn_checkout" routerLink="/home">Continue Shopping</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<mat-card *ngIf="!favorite.items.length" class="home_style">
+  <p>
+    You don't have any favorites yet.
+    <button class="btn btn-primary btn_checkout" routerLink="/home">Start Shopping</button>
+  </p>
+</mat-card>

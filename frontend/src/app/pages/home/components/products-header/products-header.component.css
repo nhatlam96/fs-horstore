@@ -1,0 +1,35 @@
+.custom-range {
+    width: 100%;
+    height: 6px;
+    background-color: #ddd;
+    outline: none;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .custom-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .custom-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .custom-range::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  

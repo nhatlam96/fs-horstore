@@ -1,0 +1,59 @@
+<div *ngIf="cart.items.length" class="home_style">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of dataSource">
+        <td>
+          <img [src]="element.product" alt="product" class="product_img" />
+        </td>
+        <td>
+          <p class="truncate">{{ element.name }}</p>
+        </td>
+        <td>{{ element.price | currency }}</td>
+        <td>
+          <button (click)="onRemoveQuantity(element)" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span>{{ element.quantity }}</span>
+          <button (click)="onAddQuantity(element)" class="btn btn-sm btn-outline-primary">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </td>
+        <td>{{ element.quantity * element.price | currency }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="onRemoveFromCart(element)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4"></td>
+        <td>
+          <span>{{ getTotal(cart.items) | currency }}</span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary mr-2" (click)="onClearCart()">Clear All</button>
+          <button class="btn btn-sm btn-primary" (click)="onCheckout()">Proceed To Checkout</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div *ngIf="!cart.items.length" class="home_style">
+  <p>
+    Your cart is empty.
+    <button class="btn btn-primary btn_checkout" routerLink="/home">Start Shopping</button>
+  </p>
+</div>

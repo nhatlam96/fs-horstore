@@ -1,0 +1,48 @@
+<div class="home_style">
+  <div class="home_category">
+    <app-filters (setFilters)="onSetFilters($event)"></app-filters>
+  </div>
+  <div class="home_product">
+    <app-products-header
+      (columnsCountChange)="onColumnsCountChange($event)"
+      (itemsCountChange)="onItemsCountChange($event)"
+      (sortChange)="onSortChange($event)"
+      [max_product]="max_product"
+      
+    ></app-products-header>
+    <mat-grid-list
+      *ngIf="products && products.length"
+      gutterSize="16"
+      [cols]="cols"
+      [rowHeight]="rowHeight"
+    >
+      <mat-grid-tile *ngFor="let product of getCurrentPageProducts()">
+        <!--Notice app-product-box-->
+        <div
+          (addToCart)="onAddToCart($event)"
+          (addToFavorite)="onAddToFavorite($event)"
+          app-product-box
+          [product]="product"
+          style="width: 100%;"
+        ></div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <ng-container *ngIf="!products || products.length === 0" >
+      <div class="text_align">
+        <h1>There is No Product for this search. Run Again:
+          <a >
+            <button type="button" class="btn btn-primary" (click)="getProducts()">Link</button>
+          </a>
+        </h1>
+      </div>
+      
+    </ng-container>
+    
+    <div class="text_align">
+      <button (click)="previousPage()" class="transp_btn" [disabled]="currentPage === 1"><i class="fa-solid fa-angle-left"></i></button>
+      <span>Page {{currentPage}} of {{totalPages}}</span>
+      <button class="transp_btn" (click)="nextPage()" [disabled]="currentPage === totalPages"><i class="fa-solid fa-angle-right"></i></button>
+    </div>  </div>
+    
+    
+</div>

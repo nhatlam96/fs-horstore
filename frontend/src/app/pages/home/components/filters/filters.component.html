@@ -1,0 +1,49 @@
+<mat-expansion-panel
+  *ngIf="categories"
+  style="margin: 0px 10px; background-color: #4a6376; color: white"
+  expanded
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title style="color: white"> FILTERS </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="text-center">
+    <h2>Price</h2>
+    <div style="background-color: #ffffff; border-radius: 5px">
+      <ngx-slider
+        [(value)]="minValue"
+        [(highValue)]="maxValue"
+        [options]="options"
+      ></ngx-slider>
+    </div>
+    <br /><br />
+    <h2 style="margin-top: 35px">Product is</h2>
+    <div style="margin-top: -20px">
+      <div
+        class="d-flex flex-row align-content-center justify-content-center form-check form-switch text-center"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckChecked"
+          style="margin-top: 20px"
+        />
+        <label
+          class="form-check-label"
+          for="flexCheckChecked"
+          style="margin-top: 18.5px; margin-left: 10px"
+          >Favorite</label
+        >
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="checkCheckbox()"
+        style="background-color: white; color: black; padding: 4px 25px"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+</mat-expansion-panel>

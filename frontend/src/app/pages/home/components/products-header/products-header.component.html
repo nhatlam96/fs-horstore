@@ -1,0 +1,23 @@
+<mat-card class="mb-4">
+    <div class="d-flex flex-row flex-wrap align-content-center justify-content-center">
+      <div>
+        <div class="dropdown" style="margin-top: 10px;">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Sort Prices by {{ sort }}
+                </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <div class="textign" (click)="onSortUpdated('desc')">DESC</div>
+          <div class="textign" (click)="onSortUpdated('asc')" >ASC</div>
+          </ul>
+        </div>
+      </div>
+      <div class="text_align">
+        <div class="slider-container">
+          <p>Select Number of items: <span *ngIf="selectedNumber > 1">{{ selectedNumber }}</span></p>
+          <input class="form-range" type="range" [min]="1" [max]="max_product" [(ngModel)]="selectedNumber" (input)="onItemsUpdated(selectedNumber)" />
+        </div>
+        
+        
+      </div>
+    </div>
+  </mat-card>
