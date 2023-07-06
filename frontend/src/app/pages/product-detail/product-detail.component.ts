@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Inject, AfterViewInit, HostListener, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription, map, startWith } from 'rxjs';
-import { Product } from 'src/app/models/product.model';
-import { CartService } from 'src/app/services/cart.service';
-import { FavoriteService } from 'src/app/services/favorite.service';
-import { StoreService } from 'src/app/services/store.service';
-import {Dialog, DialogRef} from '@angular/cdk/dialog';
+import { Product } from 'app/models/product.model';
+import { CartService } from 'app/services/cart.service';
+import { FavoriteService } from 'app/services/favorite.service';
+import { StoreService } from 'app/services/store.service';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Dialog1Component } from './dialog1/dialog1.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -32,7 +32,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   TwoProducts: Array<Product> = [];
 
   productsSubscription: Subscription | undefined;
-// ----------------------
+  // ----------------------
   encodedProductName1: string | undefined;
   encryptedId1: string | undefined;
   product1: Product | null | undefined;
@@ -41,7 +41,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   encryptedId2: string | undefined;
   product2: Product | null | undefined;
 
-// -----------------------------
+  // -----------------------------
 
 
 
@@ -52,45 +52,45 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );
-  
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        this.category = params.get('category');
-        const name = params.get('name');
-    
-        const encryptedId = params.get('id');
-        this.name = this.generateProductNameURL(name);
-        
-        if (encryptedId) {
-          const decodedId = decodeURIComponent(encryptedId);
-          this.decryptedId = this.decryptId(decodedId);
-          console.log("Decrypted ID:", this.decryptedId);
-          if (this.decryptedId) {
-            this.decryptedIdInt = parseInt(this.decryptedId, 10);
-  
-            this.getProductById1(this.decryptedIdInt + 1);
-            this.getProductById2(this.decryptedIdInt + 2);
-            this.getProductById(this.decryptedIdInt);
-  
-            console.log("csdcs sdcsdcs: ", this.product1);
-            console.log("csdcs sdcsdcs: ", this.product2);
-            
-            console.log("Decrypted ID as integer:", this.decryptedIdInt);
-          }
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.category = params.get('category');
+      const name = params.get('name');
+
+      const encryptedId = params.get('id');
+      this.name = this.generateProductNameURL(name);
+
+      if (encryptedId) {
+        const decodedId = decodeURIComponent(encryptedId);
+        this.decryptedId = this.decryptId(decodedId);
+        console.log("Decrypted ID:", this.decryptedId);
+        if (this.decryptedId) {
+          this.decryptedIdInt = parseInt(this.decryptedId, 10);
+
+          this.getProductById1(this.decryptedIdInt + 1);
+          this.getProductById2(this.decryptedIdInt + 2);
+          this.getProductById(this.decryptedIdInt);
+
+          console.log("csdcs sdcsdcs: ", this.product1);
+          console.log("csdcs sdcsdcs: ", this.product2);
+
+          console.log("Decrypted ID as integer:", this.decryptedIdInt);
         }
-         // Convert decryptedId to an integer
-         
-      });
-     
-    
-  
+      }
+      // Convert decryptedId to an integer
+
+    });
+
+
+
 
 
   }
-// ----------------------------
+  // ----------------------------
   ngOnChanges(changes: SimpleChanges) {
     if (changes['product1'] && !changes['product1'].firstChange) {
       this.generateURLParams1();
@@ -103,8 +103,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   generateURLParams1() {
     if (this.product1) {
       this.encodedProductName1 = this.generateProductNameURL1(this.product1.title);
-        this.encryptedId1 = this.encryptId(this.product1.id.toString()).toString();
-        console.log("sdsdsd", this.product1);
+      this.encryptedId1 = this.encryptId(this.product1.id.toString()).toString();
+      console.log("sdsdsd", this.product1);
     }
     console.log("sdsdsd", this.product1);
 
@@ -150,10 +150,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     if (productName) {
       const originalProductName = decodeURIComponent(productName);
       // Use the encoded value as needed
-  
+
       return originalProductName;
     }
-    
+
     return '';
   }
 
@@ -164,7 +164,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
     private favService: FavoriteService,
     public dialog: MatDialog,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   private decryptId(encryptedId: string | null): string | null {
     if (encryptedId) {
@@ -218,8 +218,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
       (product: Product) => { // Update the parameter type to 'Product' instead of 'Product[]'
         this.product2 = product;
         this.encodedProductName2 = this.generateProductNameURL2(this.product2.title);
-      this.encryptedId2 = this.encryptId(this.product2.id.toString()).toString();
-      console.log("sdsdsd", this.product2);
+        this.encryptedId2 = this.encryptId(this.product2.id.toString()).toString();
+        console.log("sdsdsd", this.product2);
       },
       (error) => {
         console.log('Error fetching product:', error);
@@ -230,7 +230,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy, AfterViewInit 
   getProductHelp(id: number): Observable<Product> {
     return this.storeService.getProductById(id);
   }
-  
+
   ngOnDestroy(): void {
     if (this.productSubscription) {
       this.productSubscription.unsubscribe();

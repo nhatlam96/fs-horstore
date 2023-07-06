@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { application } from 'express';
 import { Subscription } from 'rxjs';
-import { StoreService } from 'src/app/services/store.service';
+import { StoreService } from 'app/services/store.service';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import { Router } from '@angular/router';
 
@@ -21,7 +21,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   categoriesSubscription: Subscription | undefined;
   selectedNumber: number = 1;
   selectedNumber2: number = 100;
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(private storeService: StoreService, private router: Router) { }
 
   ngOnInit(): void {
     this.categoriesSubscription = this.storeService
@@ -61,7 +61,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   go(): void {
-    console.log("min:", this.minValue, "max: " , this.maxValue);
+    console.log("min:", this.minValue, "max: ", this.maxValue);
   }
   onSetFilters(min: number, max: number, favorite: boolean): void {
     this.setFilters.emit({ min, max, favorite });

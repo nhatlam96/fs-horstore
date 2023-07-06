@@ -1,12 +1,27 @@
-<ng-container *ngIf="product" style="z-index: 5;">
+<ng-container *ngIf="product" style="z-index: 5">
   <div class="product_box2">
     <div class="flex_2_hor margin_bottom">
       <span>{{ product.category }}</span>
       <button (click)="onAddToFavorite(product)" class="transp_btn">
-        <i class="fa" style="color: #d11111;" [ngClass]="{'fa-heart-o': !product.isFavorite, 'fa-heart': product.isFavorite}"></i>
+        <i
+          class="fa"
+          style="color: #d11111"
+          [ngClass]="{
+            'fa-heart-o': !product.isFavorite,
+            'fa-heart': product.isFavorite
+          }"
+        ></i>
       </button>
     </div>
-    <a class="text-center" [routerLink]="['/product', generateProductNameURL(product.category), encodedProductName, encryptedId]">
+    <a
+      class="text-center"
+      [routerLink]="[
+        '/product',
+        generateProductNameURL(product.category),
+        encodedProductName,
+        encryptedId
+      ]"
+    >
       <img class="product_img" [src]="product.image" alt="Product Image" />
     </a>
     <div class="p_desc">
@@ -22,6 +37,3 @@
     </div>
   </div>
 </ng-container>
-
-
-

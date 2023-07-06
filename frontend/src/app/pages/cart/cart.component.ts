@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Cart, CartItem } from 'src/app/models/cart.model';
-import { CartService } from 'src/app/services/cart.service';
+import { Cart, CartItem } from 'app/models/cart.model';
+import { CartService } from 'app/services/cart.service';
 import { loadStripe } from '@stripe/stripe-js';
 import { Subscription } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription | undefined;
 
   // The methode getTotal has been written in cart.service. Now we import that
-  constructor(private cartService: CartService, private http: HttpClient) {}
+  constructor(private cartService: CartService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.cartSubscription = this.cartService.cart.subscribe((_cart: Cart) => {

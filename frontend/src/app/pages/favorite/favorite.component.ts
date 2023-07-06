@@ -13,8 +13,8 @@ favorite: Favorite = { items:  is the favorite object
 
 
 import { Component, OnInit } from '@angular/core';
-import { Favorite, FavoriteItem } from 'src/app/models/favorite.model';
-import { FavoriteService } from 'src/app/services/favorite.service';
+import { Favorite, FavoriteItem } from 'app/models/favorite.model';
+import { FavoriteService } from 'app/services/favorite.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -35,7 +35,7 @@ export class FavoriteComponent implements OnInit {
   ]
   dataSource: FavoriteItem[] = [];
   favoriteSubscription: Subscription | undefined;
-  constructor(private favoriteService: FavoriteService) {}
+  constructor(private favoriteService: FavoriteService) { }
 
   ngOnInit(): void {
     this.favoriteSubscription = this.favoriteService.favorite.subscribe((_favorite: Favorite) => {
@@ -50,7 +50,7 @@ export class FavoriteComponent implements OnInit {
   onRemoveFromFavorite(item: FavoriteItem): void {
     this.favoriteService.removeFromFavorite(item);
   }
-  onCheckout(): void{
+  onCheckout(): void {
 
   }
   ngOnDestroy() {

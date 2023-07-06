@@ -1,27 +1,27 @@
-.home_style{
-    max-width: 1300px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 30% 70%;
+.home_style {
+  max-width: 1300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 30% 70%;
 }
 .slider-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  input[type="range"] {
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  p {
-    font-size: 18px;
-    font-weight: bold;
-  }
+  display: flex;
+  align-items: center;
+}
 
-  .text_align{
-    margin-top: 30px;
-  }
-  .text_align i{
-    color: red;
-  }
+input[type="range"] {
+  width: 200px;
+  margin-right: 10px;
+}
+
+p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.text_align {
+  margin-top: 30px;
+}
+.text_align i {
+  color: red;
+}

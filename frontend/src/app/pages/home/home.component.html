@@ -8,7 +8,6 @@
       (itemsCountChange)="onItemsCountChange($event)"
       (sortChange)="onSortChange($event)"
       [max_product]="max_product"
-      
     ></app-products-header>
     <mat-grid-list
       *ngIf="products && products.length"
@@ -23,26 +22,43 @@
           (addToFavorite)="onAddToFavorite($event)"
           app-product-box
           [product]="product"
-          style="width: 100%;"
+          style="width: 100%"
         ></div>
       </mat-grid-tile>
     </mat-grid-list>
-    <ng-container *ngIf="!products || products.length === 0" >
+    <ng-container *ngIf="!products || products.length === 0">
       <div class="text_align">
-        <h1>There is No Product for this search. Run Again:
-          <a >
-            <button type="button" class="btn btn-primary" (click)="getProducts()">Link</button>
+        <h1>
+          There is No Product for this search. Run Again:
+          <a>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="getProducts()"
+            >
+              Link
+            </button>
           </a>
         </h1>
       </div>
-      
     </ng-container>
-    
+
     <div class="text_align">
-      <button (click)="previousPage()" class="transp_btn" [disabled]="currentPage === 1"><i class="fa-solid fa-angle-left"></i></button>
-      <span>Page {{currentPage}} of {{totalPages}}</span>
-      <button class="transp_btn" (click)="nextPage()" [disabled]="currentPage === totalPages"><i class="fa-solid fa-angle-right"></i></button>
-    </div>  </div>
-    
-    
+      <button
+        (click)="previousPage()"
+        class="transp_btn"
+        [disabled]="currentPage === 1"
+      >
+        <i class="fa-solid fa-angle-left"></i>
+      </button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        class="transp_btn"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+      >
+        <i class="fa-solid fa-angle-right"></i>
+      </button>
+    </div>
+  </div>
 </div>

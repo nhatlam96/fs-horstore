@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product.model';
-import { CartService } from 'src/app/services/cart.service';
-import { FavoriteService } from 'src/app/services/favorite.service';
-import { StoreService } from 'src/app/services/store.service';
+import { Product } from 'app/models/product.model';
+import { CartService } from 'app/services/cart.service';
+import { FavoriteService } from 'app/services/favorite.service';
+import { StoreService } from 'app/services/store.service';
 
 const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 350, 4: 350 };
 
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private storeService: StoreService,
     private favService: FavoriteService,
     private route: ActivatedRoute, private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -55,20 +55,20 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.getProducts2(specificCategory);
         // Redirect to localhost:3000/home
       }
-      else if(search){
-        this.getProducts2("f43",search);
+      else if (search) {
+        this.getProducts2("f43", search);
       }
-      else{
+      else {
         this.getProducts();
         this.subscription = this.storeService.triggerFunction$.subscribe(({ class1, class2, class3, class4 }) => {
           this.getProducts2(class1, class2, class3, class4);
         });
       }
     });
-   
-    
 
-    
+
+
+
   }
 
   executeFunction(): void {
@@ -118,43 +118,43 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.products = _products;
         this.initFav(_products);
 
-        if(this.products){
-          this.totalPages = Math.ceil(this.products.length/this.pageSize);
+        if (this.products) {
+          this.totalPages = Math.ceil(this.products.length / this.pageSize);
           this.currentPage = 1;
         }
       });
   }
 
   // note underscore
-  getProducts2(class1? : string,
-    class2? : string,
-    class3? : string,
-    class4? : string): void {
+  getProducts2(class1?: string,
+    class2?: string,
+    class3?: string,
+    class4?: string): void {
     this.productsSubscription = this.storeService
       .getAllProducts(this.count, this.sort, class1, class2, class3, class4)
       .subscribe((_products) => {
         this.products = _products;
         this.initFav(_products);
 
-        if(this.products){
-          this.totalPages = Math.ceil(this.products.length/this.pageSize);
+        if (this.products) {
+          this.totalPages = Math.ceil(this.products.length / this.pageSize);
           this.currentPage = 1;
         }
       });
   }
 
-  setMaxProduct():void{
+  setMaxProduct(): void {
     this.productsSubscription = this.storeService
       .getAllProducts(this.count, this.sort, this.category)
       .subscribe((_products) => {
-          this.max_product = _products.length;
-          this.initFav(_products);
+        this.max_product = _products.length;
+        this.initFav(_products);
 
       });
   }
-  
 
-  
+
+
   //
   getCurrentPageProducts() {
     // Handle the case when products is undefined
@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // Ensure endIndex does not exceed the array length
     const slicedProducts = this.products.slice(startIndex, endIndex);
-    
+
     return slicedProducts;
   }
 
@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       price: product.price,
       id: product.id,
     });
-    console.log("I am rungninn",product.isFavorite);
+    console.log("I am rungninn", product.isFavorite);
     this.storeService.updateById(product.id, product.isFavorite).subscribe(
       (response: Array<Product>) => {
         // Handle the successful response here
@@ -212,15 +212,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error('Error updating product:', error);
       }
     );
-    console.log("5",product.isFavorite);
+    console.log("5", product.isFavorite);
 
   }
 
-  initFav(products: Array<Product>): void{
+  initFav(products: Array<Product>): void {
     console.log("6fsdsdsddsdsd sdsds sdsdfsfsf", products);
 
     for (let index = 0; index < products.length; index++) {
-      if(products[index].isFavorite == true){
+      if (products[index].isFavorite == true) {
         this.favService.addSet({
           product: products[index].image,
           name: products[index].title,
@@ -235,8 +235,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
-     // Unsubscribe to avoid memory leaks
-     if (this.subscription) {
+    // Unsubscribe to avoid memory leaks
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

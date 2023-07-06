@@ -85,4 +85,4 @@ import { FooterComponent } from './components/header/Footer/footer/footer.compon
   providers: [CartService, StoreService, FavoriteService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,14 +1,3 @@
-# Project Structure
-- gitlab_group-c
-  - backend
-    - *.git*
-    - startScript.bat
-    - startScript.sh
-    - other files
-  - frontend
-    - *.git*
-    - other files
-
 # Starting the Webshop
 
 ## Requirements

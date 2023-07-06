@@ -11,9 +11,9 @@ import { FavoriteService } from './services/favorite.service';
 export class AppComponent implements OnInit {
   cart: Cart = { items: [] };
   favorite: Favorite = { items: [] };
-  
+
   constructor(private cartService: CartService,
-    private favoriteService: FavoriteService) {}
+    private favoriteService: FavoriteService) { }
 
   ngOnInit() {
     this.cartService.cart.subscribe((_cart) => {

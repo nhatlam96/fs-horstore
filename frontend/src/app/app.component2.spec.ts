@@ -48,7 +48,7 @@ describe('FavoriteService', () => {
                 name: 'Sample Item',
                 product: "", // Add the missing property
                 price: 0, // Add the missing property
-            };           
+            };
             const existingItem = { ...item };
             const code = 0;
             favoriteService.favorite.next({ items: [existingItem] });

@@ -2,7 +2,7 @@
 FROM node:latest as builder
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /src/app
 
 # Install Angular CLI globally
 RUN npm install -g @angular/cli

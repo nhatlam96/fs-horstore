@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./products-header.component.css']
 })
 export class ProductsHeaderComponent {
-[x: string]: any;
+  [x: string]: any;
   @Output() columnsCountChange = new EventEmitter<number>();
   @Output() itemsCountChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<string>();
@@ -15,7 +15,7 @@ export class ProductsHeaderComponent {
   sort = 'asc';
   selectedNumber: number = 1;
 
-  constructor() {}
+  constructor() { }
 
   onColumnsUpdated(colsNum: number): void {
     this.columnsCountChange.emit(colsNum);
@@ -35,13 +35,13 @@ export class ProductsHeaderComponent {
     // Vous pouvez ajouter du code supplémentaire ici selon vos besoins
     console.log('Nouvelle valeur sélectionnée :', this.selectedNumber);
   }
-  
+
   moveLeft() {
     if (this.selectedNumber > 1) {
       this.selectedNumber--;
     }
   }
-  
+
   moveRight() {
     if (this.selectedNumber < 20) {
       this.selectedNumber++;

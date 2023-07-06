@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AES, enc } from 'crypto-js';
 
-import { Product } from 'src/app/models/product.model';
-import { FavoriteService } from 'src/app/services/favorite.service';
-import { StoreService } from 'src/app/services/store.service';
+import { Product } from 'app/models/product.model';
+import { FavoriteService } from 'app/services/favorite.service';
+import { StoreService } from 'app/services/store.service';
 
 @Component({
   selector: '[app-product-box]',
@@ -22,7 +22,7 @@ export class ProductBoxComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private favService: FavoriteService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.generateURLParams();
@@ -58,10 +58,10 @@ export class ProductBoxComponent implements OnInit {
   }
 
   onAddToFavorite(product: Product): void {
-    console.log("1efwefwef",product.isFavorite);
+    console.log("1efwefwef", product.isFavorite);
     product.isFavorite = !product.isFavorite;
     this.addToFavorite.emit(product);
-    console.log("2",this.product.isFavorite);
+    console.log("2", this.product.isFavorite);
   }
 
 }

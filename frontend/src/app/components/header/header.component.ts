@@ -1,24 +1,24 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { Observable, Subscription, map, startWith, switchMap } from 'rxjs';
-import { Cart, CartItem } from 'src/app/models/cart.model';
-import { Favorite, FavoriteItem } from 'src/app/models/favorite.model';
-import { Product } from 'src/app/models/product.model';
-import { HomeComponent } from 'src/app/pages/home/home.component';
-import { CartService } from 'src/app/services/cart.service';
-import { FavoriteService } from 'src/app/services/favorite.service';
-import { StoreService } from 'src/app/services/store.service';
+import { Cart, CartItem } from 'app/models/cart.model';
+import { Favorite, FavoriteItem } from 'app/models/favorite.model';
+import { Product } from 'app/models/product.model';
+import { HomeComponent } from 'app/pages/home/home.component';
+import { CartService } from 'app/services/cart.service';
+import { FavoriteService } from 'app/services/favorite.service';
+import { StoreService } from 'app/services/store.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls:['./header.component.css']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
   static filterChicking(): any {
-      throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.");
   }
   private _cart: Cart = { items: [] };
   private _favorite: Favorite = { items: [] };
@@ -39,7 +39,7 @@ export class HeaderComponent {
   filteredOptions: Observable<string[]> | undefined;
   productsSubscription: Subscription | undefined;
   check: boolean = false;
-  
+
   private _filter(value: string): Observable<string[]> {
     const filterValue = value.toLowerCase();
     this.check = true;
@@ -51,10 +51,10 @@ export class HeaderComponent {
     );
   }
 
-  public filterChicking(){
-      return this.check
+  public filterChicking() {
+    return this.check
   }
-  
+
   ngOnInit(): void {
     this.categoriesSubscription = this.storeService
       .getCategory()
@@ -62,32 +62,32 @@ export class HeaderComponent {
         this.category1 = response;
         this.categori(this.category1);
       });
-  
+
     this.myControl = new FormControl();
-  
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       switchMap(value => this._filter(value || ''))
     );
   }
-  
-  search(option: string) : void {
-    if(option){
+
+  search(option: string): void {
+    if (option) {
       this.changeCategory("f43", option);
     }
   }
-  search2(option: string) : void {
+  search2(option: string): void {
     const queryParams = { search: option };
     this.router.navigate(['/home'], { queryParams: queryParams });
   }
 
-  addSuggestion(query: string): void{
+  addSuggestion(query: string): void {
     this.storeService.addSuggestion(query).subscribe((response: Array<string>) => {
     });
   }
   onDeleteCart(): void {
     const confirmDelete = window.confirm("Are you sure you want to delete the cart items?");
-  
+
     if (confirmDelete) {
       // Perform the deletion logic here
       this.onClearCart();
@@ -96,20 +96,20 @@ export class HeaderComponent {
 
   onDeleteFavorites(): void {
     const confirmDelete = window.confirm("Are you sure you want to delete the favorite items?");
-  
+
     if (confirmDelete) {
       // Perform the deletion logic here
       this.onClearFavorite();
       // Refresh the page
-    //window.location.reload();
+      //window.location.reload();
     }
   }
-  
-  
-  getSuggestion() : void{
+
+
+  getSuggestion(): void {
     this.storeService.getSuggestions().subscribe((response: Array<string>) => {
       this.options = response;
-      console.log("adada", this,this.options);
+      console.log("adada", this, this.options);
     });
   }
 
@@ -118,15 +118,15 @@ export class HeaderComponent {
     this.router.navigate(['/home'], { queryParams: queryParams });
   }
 
-  changeCategory(class1? : string,
-    class2? : string,
-    class3? : string,
-    class4? : string): void {
+  changeCategory(class1?: string,
+    class2?: string,
+    class3?: string,
+    class4?: string): void {
     this.storeService.triggerFunction(class1, class2, class3, class4);
   }
 
   constructor(private cartService: CartService,
-    private favoriteService: FavoriteService, private storeService: StoreService, private router: Router, private route: ActivatedRoute) {}
+    private favoriteService: FavoriteService, private storeService: StoreService, private router: Router, private route: ActivatedRoute) { }
 
   categori(category1: string[]): void {
     for (let index = 0; index < category1.length; index++) {
@@ -150,11 +150,11 @@ export class HeaderComponent {
                 if (!this.category3[index]) {
                   this.category3[index] = []; // Initialize as empty array if undefined
                 }
-                
+
                 if (this.category3[index].length <= j) {
                   this.category3[index].push([]);
                 }
-                
+
                 this.category3[index][j] = response;
                 console.log("category3_r:", this.category3[index][j]);
               });
@@ -162,10 +162,10 @@ export class HeaderComponent {
         });
     }
   }
-    
- /*  onShowCategory(category: string): void {
-    this.homeComponent.getProducts2(category)
-  } */
+
+  /*  onShowCategory(category: string): void {
+     this.homeComponent.getProducts2(category)
+   } */
 
   toggleDialog() {
     this.showDialog = !this.showDialog;
@@ -198,7 +198,7 @@ export class HeaderComponent {
 
     this.favNumber = favorite.items.length;
     this.itemsF = favorite.items;
-      
+
   }
 
   /* help(favorite: Favorite): number{
@@ -209,17 +209,17 @@ export class HeaderComponent {
     return x;
   }
  */
-  
+
   // Shipping
-  shipping(items: CartItem[]):number{
-    if(this.getTotal(items) < 29.90){
+  shipping(items: CartItem[]): number {
+    if (this.getTotal(items) < 29.90) {
       return 4.90
     }
     return 0
   }
 
- 
-  
+
+
 
 
   getTotal(items: CartItem[]): number {
@@ -235,7 +235,7 @@ export class HeaderComponent {
     window.location.reload();
   }
 
-  
+
 
   onRemoveFromCart(item: CartItem): void {
     this.cartService.removeFromCart(item);
@@ -262,5 +262,5 @@ export class HeaderComponent {
       this.categoriesSubscription.unsubscribe();
     }
   }
-  
+
 }

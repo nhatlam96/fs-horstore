@@ -8,7 +8,7 @@ timeout /t 3
 start "exec" cmd /c "docker exec -it webshop psql -U postgres -f /var/lib/postgresql/data/webshop.sql"
 start "api" cmd /c "node app/build/webapp.js"
 start "jest" cmd /c "cd app/build && jest && pause"
-start "frontend" cmd /c "cd ../webshop_frontend/ && ng serve"
+start "frontend" cmd /c "cd ../frontend/src && ng serve"
 timeout /t 8
 start "browser" "http://localhost:4200/"
 @echo on

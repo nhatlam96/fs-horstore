@@ -1,221 +1,234 @@
 <ng-container *ngIf="product">
   <div class="product_detail">
-      <div id="left" class="box-left" [ngClass]="{'sticky': isSticky}">
-        <div class="box-left-left">
-            <img class="small-image"[src]="product.image">
-            <img class="small-image"[src]="product.image">
-            <img class="small-image"[src]="product.image">
-            <img class="small-image"[src]="product.image">
-            <img class="small-image"[src]="product.image">
-        </div>
-        <div id="right" class="box-left-right"> 
-          <img id ="big-image" class="big-image"[src]="product.image">
-        </div>
+    <div id="left" class="box-left" [ngClass]="{ sticky: isSticky }">
+      <div class="box-left-left">
+        <img class="small-image" [src]="product.image" />
+        <img class="small-image" [src]="product.image" />
+        <img class="small-image" [src]="product.image" />
+        <img class="small-image" [src]="product.image" />
+        <img class="small-image" [src]="product.image" />
       </div>
-      <div class="box-right">
-        <h1>{{product.category}} - {{product.title}}</h1>
-        <h2>{{product.price | currency}}</h2>
-        <span>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <span style="margin-left: 10px;">0 votes</span>
+      <div id="right" class="box-left-right">
+        <img id="big-image" class="big-image" [src]="product.image" />
+      </div>
+    </div>
+    <div class="box-right">
+      <h1>{{ product.category }} - {{ product.title }}</h1>
+      <h2>{{ product.price | currency }}</h2>
+      <span>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <span style="margin-left: 10px">0 votes</span>
+      </span>
+      <p>Colour: <b>red</b></p>
+      <div class="other_color">
+        <span *ngIf="product1 && product2">
+          <a
+            [routerLink]="[
+              '/product',
+              generateProductNameURL1(product1.category),
+              encodedProductName1,
+              encryptedId1
+            ]"
+          >
+            <img
+              class="small-image"
+              [src]="product1.image"
+              alt="Product Image"
+            />
+          </a>
+          <a
+            [routerLink]="[
+              '/product',
+              generateProductNameURL2(product2.category),
+              encodedProductName2,
+              encryptedId2
+            ]"
+          >
+            <img
+              class="small-image"
+              [src]="product2.image"
+              alt="Product Image"
+            />
+          </a>
         </span>
-        <p>Colour: <b>red</b></p>
-        <div class="other_color">
-            <span *ngIf="product1 && product2">
-              <a [routerLink]="['/product', generateProductNameURL1(product1.category), encodedProductName1, encryptedId1]">
-                <img class="small-image" [src]="product1.image" alt="Product Image" />
-              </a>
-              <a [routerLink]="['/product',  generateProductNameURL2(product2.category), encodedProductName2, encryptedId2]">
-                <img class="small-image" [src]="product2.image" alt="Product Image" />
-              </a>
-            </span>
+      </div>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Number</mat-label>
+          <input
+            type="text"
+            placeholder="Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <div class="add_to_cart">
+        <button mat-flat-button color="primary" (click)="onAddToCart(product)">
+          Add To Cart
+        </button>
+        <button class="transp_btn"><i class="fa-regular fa-heart"></i></button>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <i class="fa-regular fa-heart"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">1-2 working days</div>
+              <div class="col text-end">5.90 €</div>
+            </div>
+            <div class="row">
+              <div class="col">Premium Delivery</div>
+              <div class="col text-end">Free with Plus</div>
+            </div>
+            <div class="row">
+              <div class="col">Try Plus free for 30 days</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <i class="fa-regular fa-heart"></i>
+              </div>
+            </div>
 
-        </div>
-        <form class="example-form ">
-            <mat-form-field class="example-full-width">
-              <mat-label >Number</mat-label>
-              <input type="text"
-                     placeholder="Pick one"
-                     aria-label="Number"
-                     matInput
-                     [formControl]="myControl"
-                     [matAutocomplete]="auto">
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-        </form>
-        <div class="add_to_cart">
-          <button mat-flat-button color="primary" (click)="onAddToCart(product)" >Add To Cart</button>        
-          <button class="transp_btn"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <div class="container">
-              <div class="row">
-                <div class="col">
+            <div class="row">
+              <div class="col">2-4 working days</div>
+              <div class="col text-end">Free</div>
+            </div>
+            <div class="row">
+              <div class="col">Free delivery and free returns</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <i class="fa-regular fa-heart"></i> Try Plus free for 30 days
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <i class="fa-regular fa-heart"></i> 100 day return policy
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <i class="fa-regular fa-heart"></i> Sell it back
+              </div>
+              <div class="col text-end">
+                <button
+                  mat-flat-button
+                  class="edit_last_btn"
+                  aria-label="Example icon button with a home icon"
+                >
                   <i class="fa-regular fa-heart"></i>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  1-2 working days
-                </div>
-                <div class="col text-end">
-                  5.90 €
-                </div>
-              </div>
-                <div class="row">
-                  <div class="col">
-                    Premium Delivery
-                  </div>
-                  <div class="col text-end">
-                    Free with Plus                    
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col">
-                   Try Plus free for 30 days
-                  </div>
+                </button>
               </div>
             </div>
-          </li>
-          <li class="list-group-item">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <i class="fa-regular fa-heart"></i>
-                </div>
-              </div>
-              
-              <div class="row">
-                <div class="col">
-                  2-4 working days
-                </div>
-                <div class="col text-end">
-                  Free                    
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col">
-                    Free delivery and free returns
-                  </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="container">
-              <div class="row">
-                  <div class="col">
-                    <i class="fa-regular fa-heart"></i> Try Plus free for 30 days
-                   
-                  </div>
+          </div>
+        </li>
+      </ul>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Category </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          {{ product.category }}
+        </p>
+      </mat-expansion-panel>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Description </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          {{ product.description }}
+        </p>
+      </mat-expansion-panel>
+      <mat-list>
+        <mat-list-item>
+          <div class="container">
+            <div class="row">
+              <div class="col">THANKS TO WORK WUTH US</div>
+              <div class="col text-end">
+                <i class="fa-regular fa-heart"></i> Connect
               </div>
             </div>
-          </li>
-          <li class="list-group-item">
-            <div class="container">
-              <div class="row">
-                  <div class="col">
-                    <i class="fa-regular fa-heart"></i> 100 day return policy
-                   
-                  </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="container">
-              <div class="row">
-                  <div class="col">
-                    <i class="fa-regular fa-heart"></i> Sell it back
-                   
-                  </div>
-                  <div class="col text-end">
-                    <button  mat-flat-button class="edit_last_btn"aria-label="Example icon button with a home icon">
-                      <i class="fa-regular fa-heart"></i>
-                    </button>
-                   
-                  </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <mat-expansion-panel expanded>
-          <mat-expansion-panel-header >
-            <mat-panel-title> Category </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>
-            {{product.category}}
-          </p>
-        </mat-expansion-panel>
-        <mat-expansion-panel expanded>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Description </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>
-            {{product.description}}
-          </p>
-        </mat-expansion-panel>
-        <mat-list>
-          <mat-list-item>
-            <div class="container">
-              <div class="row">
-                  <div class="col">
-                    THANKS TO WORK WUTH US
-                  </div>
-                  <div class="col text-end">
-                    <i class="fa-regular fa-heart"></i> Connect
-                  </div>
-
-              </div>
-            </div>
-            </mat-list-item>
-          <mat-divider></mat-divider>
-        </mat-list>
-        <h2>Reviews(5)</h2>
-        <div class="div_reviews">
-          <h3>4.5/5</h3>
-          <span class="text-end">
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </span>
-        </div>
-        <div class="note_review">
-          <span>5</span>
-          <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
-        </div>
-        <div class="note_review">
-          <span>4</span>
-          <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
-        </div>
-        <div class="note_review">
-          <span>3</span>
-          <mat-progress-bar mode="determinate" value="20"></mat-progress-bar>
-        </div>
-        <div class="note_review">
-          <span>2</span>
-          <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
-        </div>
-        <div class="note_review">
-          <span>1</span>
-          <mat-progress-bar mode="determinate" value="4"></mat-progress-bar>
-        </div>
-        <button mat-flat-button color="primary" (click)="openDialog()"> See all reviews</button>
-        <button mat-flat-button color="primary" (click)="openDialog()"> Review</button>
-        <a role="button" (click)="openDialog()">How do review work?</a>     
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <h2>Reviews(5)</h2>
+      <div class="div_reviews">
+        <h3>4.5/5</h3>
+        <span class="text-end">
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+        </span>
+      </div>
+      <div class="note_review">
+        <span>5</span>
+        <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+      </div>
+      <div class="note_review">
+        <span>4</span>
+        <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+      </div>
+      <div class="note_review">
+        <span>3</span>
+        <mat-progress-bar mode="determinate" value="20"></mat-progress-bar>
+      </div>
+      <div class="note_review">
+        <span>2</span>
+        <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
+      </div>
+      <div class="note_review">
+        <span>1</span>
+        <mat-progress-bar mode="determinate" value="4"></mat-progress-bar>
+      </div>
+      <button mat-flat-button color="primary" (click)="openDialog()">
+        See all reviews
+      </button>
+      <button mat-flat-button color="primary" (click)="openDialog()">
+        Review
+      </button>
+      <a role="button" (click)="openDialog()">How do review work?</a>
     </div>
   </div>
-  <div >
-    <h1 class="text-center" style="margin-top: 300px;">
+  <div>
+    <h1 class="text-center" style="margin-top: 300px">
       ------------------- THANKS FOR WATCHING -------------------
     </h1>
   </div>
